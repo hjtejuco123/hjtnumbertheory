@@ -1,57 +1,82 @@
-# Congruence / Residue Class Program
+# Least Residue Program with Detailed Simulation
 
-print("======================================")
-print("   CONGRUENCE / RESIDUE CLASS PROGRAM")
-print("======================================")
+print("===================================")
+print("   LEAST RESIDUE PROGRAM")
+print("===================================")
 
 # User input
-n = int(input("Enter modulo n: "))
-r = int(input("Enter remainder/residue r: "))
+a = int(input("Enter the number a: "))
+m = int(input("Enter the modulo m: "))
 
 print("\nGiven:")
-print(f"Residue class: {r} (mod {n})")
+print(f"{a} (mod {m})")
 
-# Check valid remainder
-if r < 0 or r >= n:
-    print("\nNote:")
-    print(f"In modulo {n}, valid remainders are from 0 to {n - 1}.")
-    r = r % n
-    print(f"So your residue is reduced to: {r} (mod {n})")
+# Compute quotient and remainder
+quotient = a // m
+remainder = a % m
 
-print("\nStep 1: Possible remainders")
-print(f"Modulo {n} has these possible remainders:")
-for i in range(n):
+print("\nStep 1: Divide")
+print(f"{a} ÷ {m} = {quotient} remainder {remainder}")
+
+print("\nStep 2: Write in division form")
+print(f"{a} = {quotient}({m}) + {remainder}")
+
+print("\nStep 3: Congruence form")
+print(f"{a} ≡ {remainder} (mod {m})")
+
+print("\nAnswer:")
+print(f"Least residue: {remainder}")
+
+# Step 4 Detailed Simulation
+print("\nStep 4: Possible least residues")
+print(f"For modulo {m}, the least residues are:\n")
+
+for i in range(m):
+    print(f"Remainder {i}")
+
+print("\nExplanation:")
+print(f"When dividing by {m},")
+print(f"the remainder must always be from 0 up to {m-1}.")
+
+print("\nSimulation using division:")
+
+for i in range(m):
+    sample = m + i
+    q = sample // m
+    r = sample % m
+
+    print(f"{sample} ÷ {m} = {q} remainder {r}")
+
+print("\nTherefore, the only possible least residues are:")
+
+for i in range(m):
     print(i, end=" ")
+
 print()
 
-print("\nStep 2: Generate numbers in the residue class")
-print(f"Numbers that have remainder {r} when divided by {n}:")
+# Step 5 Detailed Verification
+print("\nStep 5: Verification")
 
-numbers = []
+difference = a - remainder
 
-# Generate negative and positive numbers
-for k in range(-5, 6):
-    value = r + (n * k)
-    numbers.append(value)
+print(f"Subtract the least residue from the original number:")
+print(f"{a} - {remainder} = {difference}")
 
-print(numbers)
+print("\nNow divide the difference by the modulo:")
 
-print("\nStep 3: Verify each number")
-for num in numbers:
-    quotient = num // n
-    remainder = num % n
+verify_q = difference // m
+verify_r = difference % m
 
-    print(f"{num} ÷ {n} = {quotient} remainder {remainder}")
+print(f"{difference} ÷ {m} = {verify_q} remainder {verify_r}")
 
-print("\nStep 4: Congruence form")
-positive_numbers = [num for num in numbers if num >= 0]
+if verify_r == 0:
+    print("\nSince the remainder is 0,")
+    print(f"{difference} is divisible by {m}.")
+    print("TRUE: They are congruent.")
+else:
+    print("\nSince the remainder is not 0,")
+    print(f"{difference} is NOT divisible by {m}.")
+    print("FALSE: They are not congruent.")
 
-for i in range(len(positive_numbers)):
-    print(positive_numbers[i], end="")
-    if i < len(positive_numbers) - 1:
-        print(" ≡ ", end="")
-
-print(f" (mod {n})")
-
-print("\nConclusion:")
-print(f"All these numbers belong to the same residue class {r} modulo {n}.")
+print("\nFinal Answer:")
+print(f"{a} ≡ {remainder} (mod {m})")
