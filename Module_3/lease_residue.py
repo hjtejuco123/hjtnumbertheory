@@ -1,4 +1,3 @@
-# Least Residue Program with Detailed Simulation
 
 print("===================================")
 print("   LEAST RESIDUE PROGRAM")
